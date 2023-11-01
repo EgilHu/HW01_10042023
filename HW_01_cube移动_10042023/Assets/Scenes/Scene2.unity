@@ -157,7 +157,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8737617967919254730, guid: cfe5c4dd407851f45aefd5eeecf02db6, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 8737617967919254730, guid: cfe5c4dd407851f45aefd5eeecf02db6, type: 3}
       propertyPath: m_LocalRotation.x
@@ -165,7 +165,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8737617967919254730, guid: cfe5c4dd407851f45aefd5eeecf02db6, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 8737617967919254730, guid: cfe5c4dd407851f45aefd5eeecf02db6, type: 3}
       propertyPath: m_LocalRotation.z
@@ -177,7 +177,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8737617967919254730, guid: cfe5c4dd407851f45aefd5eeecf02db6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: -90
       objectReference: {fileID: 0}
     - target: {fileID: 8737617967919254730, guid: cfe5c4dd407851f45aefd5eeecf02db6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -188,9 +188,6 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 8737617967919254724, guid: cfe5c4dd407851f45aefd5eeecf02db6, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 850419773}
     - targetCorrespondingSourceObject: {fileID: 8737617967919254724, guid: cfe5c4dd407851f45aefd5eeecf02db6, type: 3}
       insertIndex: -1
       addedObject: {fileID: 850419774}
@@ -310,7 +307,8 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8737617967919254725, guid: cfe5c4dd407851f45aefd5eeecf02db6, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -783,19 +781,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8737617967919254724, guid: cfe5c4dd407851f45aefd5eeecf02db6, type: 3}
   m_PrefabInstance: {fileID: 92507223}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &850419773
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 850419772}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af897e4f02cae1a4d8540e2c339f97c7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rotationSpeed: 120
 --- !u!114 &850419774
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -810,7 +795,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 7
   rotationSpeed: 0
-  cameraTransform: {fileID: 400889824}
 --- !u!114 &850419780
 MonoBehaviour:
   m_ObjectHideFlags: 0
