@@ -28,9 +28,10 @@ namespace MyNamespace
         public static void LoadScene(string sceneName)
         {
             SceneManager.LoadScene(sceneName);
+            sceneSwitchCount++;
         }
 
-        public int sceneSwitchCount = 0;
+        public static int sceneSwitchCount = 0;
         // 声明一个事件以在场景切换次数发生变化时通知订阅者
         public event Action OnSceneSwitchCountChanged;
         private void Start()
@@ -45,9 +46,9 @@ namespace MyNamespace
 
         }
 
-        private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+        public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
-            sceneSwitchCount++;
+            //sceneSwitchCount++;
 
             // 当场景加载时，触发事件通知订阅者
             OnSceneSwitchCountChanged?.Invoke();
