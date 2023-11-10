@@ -1,101 +1,120 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class CharacterManager : MonoBehaviour
 {
-    //public static CharacterManager Instance { get; private set; }
+    public enum CharacterState
+    {
+        Idle,
+        Walk,
+        Jump
+    }
+
+    public Text stateText; // 将Text组件拖拽到这里
+
+    private CharacterState currentState = CharacterState.Idle;
+    private bool isJumping = false;
+
     public static CharacterManager instance;
-    //private static CharacterManager instance;
 
-
-    public float moveSpeed = 5.0f;
-    public float rotationSpeed = 90.0f;
-    public float jumpForce = 5.0f;
-    public int maxJumps = 3;
-
-    private Vector3 moveDirection;
-    private int jumpsRemaining;
-    private bool canJump = true;
-    private Rigidbody rb;
-    private GameObject Player;
-    public bool ReachGround;
+    // 单例模式的实例获取方法
+    public static CharacterManager Instance
+    {
+        get
+        {
+            if (instance == null)
+            {
+                instance = FindObjectOfType<CharacterManager>();
+                if (instance == null)
+                {
+                    GameObject obj = new GameObject("CharacterManager");
+                    instance = obj.AddComponent<CharacterManager>();
+                }
+            }
+            return instance;
+        }
+    }
 
     private void Awake()
     {
-        // 设置CharacterManager实例，确保只有一个实例
+        // 确保只有一个实例存在
         if (instance == null)
         {
             instance = this;
-            DontDestroyOnLoad(this.gameObject);
         }
-        else if (instance != this)
+        else
         {
-            Destroy(this.gameObject);
+            Destroy(gameObject);
         }
     }
 
-    public void MoveCharacter()
+    private void Update()
     {
+        // 处理输入
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
+        bool jumpInput = Input.GetKeyDown(KeyCode.Space);
 
-        // 移动逻辑（与原始代码相同）
-      
-        // 计算移动方向
-        Vector3 forward = Player.transform.forward;
-        forward.y = 0;
-        forward.Normalize();
-
-        Vector3 right = Player.transform.right;
-        right.y = 0;
-        right.Normalize();
-
-        moveDirection = (forward * verticalInput + right * horizontalInput).normalized;
-
-        // 如果有移动输入
-        if (moveDirection != Vector3.zero)
+        // 更新状态机
+        if (!isJumping)
         {
-            // 旋转Cube以适应移动方向
-            Quaternion targetRotation = Quaternion.LookRotation(moveDirection);
-            Player.transform.rotation = Quaternion.RotateTowards(Player.transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+            if (Mathf.Abs(horizontalInput) > 0.1f|| Mathf.Abs(verticalInput)>0.1f)
+            {
+                ChangeState(CharacterState.Walk);
+            }
+            else
+            {
+                ChangeState(CharacterState.Idle);
+            }
 
-            // 移动Cube
-            Player.transform.Translate(moveDirection * moveSpeed * Time.deltaTime, Space.World);
-       
+            if (jumpInput)
+            {
+                ChangeState(CharacterState.Jump);
+            }
+        }
+
+        // 更新UI上的状态信息
+        UpdateUI();
+    }
+
+    private void ChangeState(CharacterState newState)
+    {
+        if (newState != currentState)
+        {
+            currentState = newState;
+            Debug.Log("Switching to state: " + currentState);
+
+            // 在这里添加处理不同状态的逻辑
+            switch (currentState)
+            {
+                case CharacterState.Idle:
+                    // 处理Idle状态逻辑
+                    break;
+
+                case CharacterState.Walk:
+                    // 处理Walk状态逻辑
+                    break;
+
+                case CharacterState.Jump:
+                    // 处理Jump状态逻辑
+                    isJumping = true;
+                    Invoke("ResetJumpFlag", 1.0f); // 1.0秒后重置isJumping标志
+                    break;
+            }
         }
     }
 
-    public void JumpCharacter()
+    private void UpdateUI()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && (jumpsRemaining > 0 || canJump))
+        if (stateText != null)
         {
-            Jump();
+            stateText.text = "State: " + currentState.ToString();
         }
     }
 
-    private void Jump()
+    // 重置Jump状态标志
+    private void ResetJumpFlag()
     {
-        rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z); // Reset vertical velocity
-        rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-        jumpsRemaining--;
-
-        if (jumpsRemaining <= 0)
-        {
-            canJump = false;
-        }
-    }
-
-    public void Update()
-    {
-        Player = GameObject.FindWithTag("Player");
-        rb = Player.GetComponent<Rigidbody>();
-        jumpsRemaining = maxJumps;
-        if (ReachGround)
-        {
-            jumpsRemaining = maxJumps; // 每次落地都重置 jumpsRemaining
-            canJump = true;
-        }
+        isJumping = false;
     }
 }

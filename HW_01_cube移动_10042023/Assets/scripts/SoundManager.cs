@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
 public class SoundManager : MonoBehaviour
 {
     public static SoundManager instance;
@@ -22,14 +21,14 @@ public class SoundManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        backgroundMusicPlayer = transform.Find("BackgroundMusic").GetComponent<AudioSource>();
+        footstepSoundPlayer = transform.Find("Footstep").GetComponent<AudioSource>();
     }
 
     private void Start()
     {
         // 获取子对象的 AudioSource 组件
-        backgroundMusicPlayer = transform.Find("BackgroundMusic").GetComponent<AudioSource>();
-        footstepSoundPlayer = transform.Find("Footstep").GetComponent < AudioSource>();
-
+       
         SceneManager.sceneLoaded += OnSceneLoaded; // 订阅场景加载事件
         PlayBackgroundMusicForScene(SceneManager.GetActiveScene().buildIndex);
     }
