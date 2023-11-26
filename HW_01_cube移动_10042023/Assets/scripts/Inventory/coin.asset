@@ -15,3 +15,4 @@ MonoBehaviour:
   itemName: coin
   itemImage: {fileID: 21300000, guid: 2a1c781e35926804da1a57d450ea2c86, type: 3}
   itemHeld: 1
+  itemPrefab: {fileID: 1877679430581169586, guid: 3190ec7026472c348b508e2fce2772a4, type: 3}
