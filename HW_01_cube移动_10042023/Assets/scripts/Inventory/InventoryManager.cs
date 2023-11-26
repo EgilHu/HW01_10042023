@@ -6,16 +6,44 @@ public class InventoryManager : MonoBehaviour
 {
     public static InventoryManager instance;
 
+public static InventoryManager Instance
+{
+    get
+    {
+        if (instance == null)
+        {
+            instance = FindObjectOfType<InventoryManager>();
+
+            if (instance == null)
+            {
+                GameObject go = new GameObject("InventoryManager");
+                instance = go.AddComponent<InventoryManager>();
+                DontDestroyOnLoad(go);
+            }
+        }
+
+        return instance;
+    }
+}
+
+
     public Inventory myBag;
     public GameObject slotGrid;
     public Slot slotPrefab;
 
     void Awake()
     {
-        if (instance != null)
-            Destroy(this);
-        instance = this;
+        if (instance != null && instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            instance = this;
+            DontDestroyOnLoad(this.gameObject);
+        }
     }
+
 
     private void OnEnable()
     {

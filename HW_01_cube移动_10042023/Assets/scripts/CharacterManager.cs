@@ -82,7 +82,7 @@ public class CharacterManager : MonoBehaviour
         if (newState != currentState)
         {
             currentState = newState;
-            Debug.Log("Switching to state: " + currentState);
+            //Debug.Log("Switching to state: " + currentState);
 
             // 在这里添加处理不同状态的逻辑
             switch (currentState)

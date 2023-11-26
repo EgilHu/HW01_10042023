@@ -7,6 +7,8 @@ namespace MyNamespace
     public class MySceneManager : MonoBehaviour
     {
         private static MySceneManager instance;
+        //public InventoryDataManager inventoryDataManager; // 可以通过 Inspector 面板指定
+
 
         public static MySceneManager Instance
         {
@@ -34,16 +36,27 @@ namespace MyNamespace
         public static int sceneSwitchCount = 0;
         // 声明一个事件以在场景切换次数发生变化时通知订阅者
         public event Action OnSceneSwitchCountChanged;
-        private void Start()
+
+        private void Awake()
         {
-            // 订阅SceneManager的SceneLoaded事件
             SceneManager.sceneLoaded += OnSceneLoaded;
+            ////SceneManager.LoadScene("Scene2", LoadSceneMode.Single);
         }
+
+        //private void Start()
+        //{
+        //    // 初始化数据（如果尚未初始化）
+        //    if (!InventoryDataManager.isInitialized)
+        //    {
+        //        inventoryDataManager.InitializeData();
+        //        InventoryDataManager.isInitialized = true;
+        //    }
+        //}
+
+
         public int GetSceneSwitchCount()
         {
-            // 返回场景切换次数
             return sceneSwitchCount;
-
         }
 
         public void OnSceneLoaded(Scene scene, LoadSceneMode mode)

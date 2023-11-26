@@ -46,7 +46,7 @@ public class SoundManager : MonoBehaviour
             // 设置 BackgroundMusicPlayer 的音频剪辑并播放
             backgroundMusicPlayer.clip = backgroundMusic[sceneIndex];
             backgroundMusicPlayer.Play();
-            Debug.Log(sceneIndex);
+            //Debug.Log(sceneIndex);
         }
     }
 

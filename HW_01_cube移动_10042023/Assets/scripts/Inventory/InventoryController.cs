@@ -16,7 +16,7 @@ public class InventoryController : MonoBehaviour
         {
             if (Input.GetKeyDown(i.ToString()))
             {
-                Debug.Log($"Number {i} key pressed");
+                //Debug.Log($"Number {i} key pressed");
                 DropItemFromSlot(i - 1); // µ÷ÕûÎª 0-based index
             }
         }
@@ -31,8 +31,6 @@ public class InventoryController : MonoBehaviour
         }
     }
 
-
-
     bool IsValidSlotIndex(int slotIndex)
     {
         return slotIndex >= 0 && slotIndex < InventoryManager.instance.myBag.itemList.Count;
@@ -40,7 +38,7 @@ public class InventoryController : MonoBehaviour
 
     void DropItemInScene(Item item, int slotIndex)
     {
-        Vector3 dropPosition = playerTransform.position + playerTransform.forward * 2f - new Vector3(0f, 1f, 0f);
+        Vector3 dropPosition = playerTransform.position + playerTransform.forward * 2f ;
 
         GameObject droppedItem = Instantiate(item.itemPrefab, dropPosition, Quaternion.identity);
 
@@ -54,7 +52,6 @@ public class InventoryController : MonoBehaviour
         }
         InventoryManager.RefreshItem();
     }
-
 
     void DropItemFromSlot(int slotIndex)
     {

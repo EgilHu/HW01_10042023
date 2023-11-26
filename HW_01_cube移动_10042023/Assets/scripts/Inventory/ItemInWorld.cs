@@ -12,6 +12,7 @@ public class ItemOnWorld : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             AddNewItem();
+            PlayerPrefs.SetInt("ItemCollected", 1);//preserve data
             Destroy(gameObject);
         }
     }

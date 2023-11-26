@@ -8,6 +8,7 @@ TagManager:
   - Portal
   - CubeObstacle
   - Text
+  - Item
   layers:
   - Default
   - TransparentFX
